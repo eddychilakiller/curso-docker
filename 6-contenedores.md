@@ -51,3 +51,20 @@ $ docker start sitio
 
 ```
 
+## Ingresar a un contenedor
+
+```bash
+
+# Pull de una imagen 
+$ docker pull jenkins/jenkins
+
+# ejecución de un contenedor 
+$  docker run -p 8080:8080 -p 50000:50000 -d --name=jenkins  jenkins/jenkins
+
+# Ingreso a un contenedor
+$ docker exec -it jenkins bash
+
+# como otro usuario
+$ docker exec -u root -it jenkins bash
+
+```
