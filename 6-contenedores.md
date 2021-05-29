@@ -112,4 +112,21 @@ mysql -u root -p employees < employees.sql
 
 ```bash
 docker rm -fv  mysql-database
-docker run --name=mysql-database -v mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34-p 3306:3306  -d mysql:5.7.34
+docker run --name=mysql-database -v /Users/eddylopezolivera/DEVELOPMENT/curso-docker/mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34
+docker exec -it mysql-database bash
+apt update
+apt install unzip
+unzip test_db-master.zip
+mysql -u root -p employees < employees.sql
+docker stop mysql-database 
+docker rm mysql-database
+docker run --name=mysql-database -v /Users/eddylopezolivera/DEVELOPMENT/curso-docker/mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34
+docker exec -it mysql-database bash
+mysql -u root -p employees
+```
+
+# Recursos
+```bash
+$ docker stats
+$ docker run --name=mysql-database -m "4096mb" -v /Users/eddylopezolivera/DEVELOPMENT/curso-docker/mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34
+```
