@@ -68,3 +68,50 @@ $ docker exec -it jenkins bash
 $ docker exec -u root -it jenkins bash
 
 ```
+
+
+## Ingresar a un contenedor
+
+```bash
+
+# Pull de una imagen 
+$ docker pull jenkins/jenkins
+
+# ejecución de un contenedor 
+$  docker run -p 8080:8080 -p 50000:50000 -d --name=jenkins  jenkins/jenkins
+
+# Ingreso a un contenedor
+$ docker exec -it jenkins bash
+
+# como otro usuario
+$ docker exec -u root -it jenkins bash
+
+```
+
+## Creación de contenedores con variables de entorno
+
+```bash
+# Descarga de MySSQL 5.7.34
+$ docker pull  mysql:5.7.34
+
+#Ejecución del contenedor
+$ docker run --name mysql-database -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -p 3306:3306  -d mysql:5.7.34
+
+# Copiar archivos a tu contenedor
+docker cp test_db-master.zip mysql-database:/tmp/test_db-master.zip
+
+# restaurar la base de datos
+docker exec -it mysql-database bash
+apt update
+apt install unzip
+unzip test_db-master.zip
+mysql -u root -p employees < employees.sql
+
+
+
+
+
+
+
+
+```
