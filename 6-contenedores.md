@@ -95,7 +95,7 @@ $ docker exec -u root -it jenkins bash
 $ docker pull  mysql:5.7.34
 
 #Ejecución del contenedor
-$ docker run --name mysql-database -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -p 3306:3306  -d mysql:5.7.34
+$ docker run --name=mysql-database -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -p 3306:3306  -d mysql:5.7.34
 
 # Copiar archivos a tu contenedor
 docker cp test_db-master.zip mysql-database:/tmp/test_db-master.zip
@@ -106,12 +106,10 @@ apt update
 apt install unzip
 unzip test_db-master.zip
 mysql -u root -p employees < employees.sql
-
-
-
-
-
-
-
-
 ```
+
+# Utilización de volúmenes persistentes
+
+```bash
+docker rm -fv  mysql-database
+docker run --name=mysql-database -v mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34-p 3306:3306  -d mysql:5.7.34
