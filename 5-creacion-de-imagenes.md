@@ -2,7 +2,7 @@
 ---
 
 ## Dockerfile Inicial
-### WORKDIR
+### EXPOSE
 - Archivo **Dockerfile**
   Este archivo y todo el material se encuentra en el directorio httpd-centos
 
@@ -13,6 +13,7 @@
       COPY sitio .
       ENV contenido prueba
       RUN echo "$contenido" > /var/www/html/prueba.html
+      EXPOSE 8080
       CMD apachectl -DFOREGROUND
     ```
 ## Construcción
