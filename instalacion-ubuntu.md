@@ -40,4 +40,4 @@
 
 # Iniciar de nuevo con el usuario y probar 
 
-docker run hello-world
+`docker run hello-world`
