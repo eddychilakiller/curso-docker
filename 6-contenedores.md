@@ -126,7 +126,9 @@ mysql -u root -p employees
 ```
 
 # Recursos
+
 ```bash
 $ docker stats
-$ docker run --name=mysql-database -m "4096mb" -v /Users/eddylopezolivera/DEVELOPMENT/curso-docker/mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34
+$ docker run --name=mysql-database -m "2gb" -v /Users/eddylopezolivera/DEVELOPMENT/curso-docker/mysqldata:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=employees -d mysql:5.7.34
 ```
+
