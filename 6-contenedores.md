@@ -28,3 +28,26 @@ docker run -d --name sitio8081 -p 8081:80 httpd
 docker rm -fv sitio80 sitio81 sitio8081
 ```
 
+## Iniciar, detener y reiniciar un contendor
+
+```bash 
+# arrancar un contenedor
+$ docker run -d --name sitio80 -p 80:80 httpd
+
+# cambiar el nombre del contenedor
+$ docker rename sitio80 sitio
+
+# Listar el contenedor 
+$ docker ps
+
+# reiniciar un contenedor
+$ docker restart sitio
+
+# detener un contenedor
+$ docker stop sitio
+
+# iniciar un contenedor
+$ docker start sitio
+
+```
+
