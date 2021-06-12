@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: <miapp>
+    labels:
+      <etiqueta>: <valor>
+spec:
+    containers:
+    - name:  <nombre del contenedor>
+      image: <imagen:version>

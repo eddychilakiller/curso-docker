@@ -27,7 +27,7 @@ Kubernetes lo que hace es compartir el IPC, Network,  UTS, para generar un pod, 
 
 ![Arquitectura de un pod ](images/pod.png)
 
-# Creando Pods 
+### Creando Pods 
 
 `$ kubectl get pod `
 `$ kubectl run --generator=run-pod/v1 podtest --image=nginx:alpine `
@@ -37,26 +37,134 @@ o bien
 `kubectl run  prueba --image=nginx:alpine`
 
 
-# Detallando mas los pods 
+### Detallando mas los pods 
 `$ kubectl get pod -o wide`
 
-# Revisando el estado de un pod 
+### Revisando el estado de un pod 
 `$ kubectl describe pod <NOMBRE_DEL_POD>`
 
-# Eliminar un pod 
+### Eliminar un pod 
 `$ kubectl delete  pod <NOMBRE_DEL_POD>`
 
-# Obtener mas información de  un pod
+### Obtener mas información de  un pod
 
 `kubectl get pod -o wide`
 
 `kubectl get pod -o yaml`
 
-# Entra a un pod 
+### Entra a un pod 
 `kubectl exec -it <NOMBRE_DEL_POD> -- sh`
 
-# Obtiene los logs de un pod 
+## Obtiene los logs de un pod 
 
 `kubectl logs  <NOMBRE_DEL_POD>`
 
 `kubectl logs  <NOMBRE_DEL_POD> -f`
+
+---
+## Manifiestos
+
+### Obtiene el manifiesto de un pod 
+`kubectl get deploy podtest -o yaml`
+
+### Ejemplo de manifiesto
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: <Image>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: <Port>
+```
+
+### ¿Cómo se que versión de la API poner?
+`kubectl api-versions`
+
+### ¿Qué va en kind?
+`kubectl api-resources`
+
+### Ejemplo
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pruebaPod
+spec:
+    containers:
+    - name: contenedor1
+      image: nginx:alpine
+```
+
+### Cómo borramos un pod con un yml
+`kubectl delete -f pod.yml`
+
+## Un pod con dos contenedores
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-dos-contenedores
+spec:
+    containers:
+    - name: contenedor1
+      image: nginx:alpine
+    - name: contenedor2
+      image: python:3.6-alpine
+      command: ['sh', '-c',  'echo "contenedor-2" > index.html && python -m http.server 8080']
+```
+
+## Ordenando con etiquetas
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-dos-contenedores-0
+    labels:
+        app: front
+        env: prod
+spec:
+    containers:
+    - name: contenedor1
+      image: nginx:alpine
+    - name: contenedor2
+      image: python:3.6-alpine
+      command: ['sh', '-c',  'echo "contenedor-2" > index.html && python -m http.server 8080']
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: pod-dos-contenedores-1
+    labels:
+        app: front
+        env: dev
+spec:
+    containers:
+    - name: contenedor1
+      image: nginx:alpine
+    - name: contenedor2
+      image: python:3.6-alpine
+      command: ['sh', '-c',  'echo "contenedor-2" > index.html && python -m http.server 8080']
+```
+
+`kubectl get pods -l env=dev`
+`kubectl get pods -l app=front`
+
+
+
+

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicasettest
+  labels:
+    app: replicasettest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata: 
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: server
+        image: nginx:alpine
