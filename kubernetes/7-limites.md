@@ -23,3 +23,35 @@ La cantidad de CPU se puede dar como: 0.5 (mitad de cpu), que es equivalente a 1
 
 La memoria está medida en bytes,  se puede usar potencias de 2 como Ei, Pi, Ti, Gi, Mi, Ki por ejemplo:
 9048, 128Mi, 345Gi
+
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        resources:
+          limits:
+            memory: "150Mi"
+            cpu: "500m"
+          requests:
+            memory: "100Mi"
+            cpu: "300m"
+        ports:        
+        - containerPort: 80
+```

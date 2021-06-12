@@ -7,7 +7,7 @@ En un deployment se  describe un estado deseado y mediante un controlador de dep
 ![Deployment](images/deployment.png)
 
 
-``yaml
+```yaml
 
 apiVersion: apps/v1
 kind: Deployment
